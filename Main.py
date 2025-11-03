@@ -81,9 +81,52 @@ def test_edge_cases(hacker1):
     hacker1._Hacker__trace_level = 5
     hacker1.launch_attack(hacker_no_rig)
 
+def test_additional_behaviours(hacker):
+    print("\n--- TEST 6: Additional Behaviours ---")
+    rig = hacker.get_rig()
+
+    # Generate a few assets in the rig
+    print("\nGenerating assets:")
+    for _ in range(3):
+        rig.generate_asset()
+
+    # Check rig condition before taking damage
+    print(f"Initial rig condition: {rig.condition()}")
+
+    # Manually simulate taking hits
+    rig.take_hit()
+    rig.take_hit()
+    print(f"Rig condition after hits: {rig.condition()}")
+
+    # Try to repair when already pristine (should print message)
+    rig.repair(hacker)
+
+    # Give hacker a CryptoToken to repair properly after damage
+    hacker._Hacker__inventory.append(Asset.create("CryptoToken"))
+    rig.repair(hacker)
+    print(f"Rig condition after repair: {rig.condition()}")
+
+    # Give hacker a new asset and test storing/retrieving
+    new_asset = Asset.create("DataSpike")
+    hacker._Hacker__inventory.append(new_asset)
+    print("\nTesting asset storage and retrieval:")
+    hacker.store_asset("DataSpike")
+    hacker.retrieve_asset("DataSpike")
+
+    # Fill rig storage to hit capacity limit
+    print("\nFilling rig storage to test capacity limit:")
+    for _ in range(10):
+        rig.store_asset(Asset.create("RemovableDrive"))
+
+    # Show final rig and hacker states
+    print("\nFinal states:")
+    print(rig)
+    print(hacker)
+
 if __name__ == "__main__":
     hacker1, hacker2 = test_basic_setup()
     test_attack_and_break(hacker1, hacker2)
     test_repair_and_upgrade(hacker2)
     test_encryption(hacker1)
     test_edge_cases(hacker1)
+    test_additional_behaviours(hacker1)
