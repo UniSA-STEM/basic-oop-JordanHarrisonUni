@@ -16,6 +16,7 @@ class Rig:
         self.__damage = 0
         self.__broken = False
         self.__upgrade_level = 0
+        self.__max_storage = 5
         # Assignment states each rig starts with 2 data spikes and 1 removable drive
         # Code for Asset init is not made yet so this may need to be changed in the future
         self.__storage = [
@@ -32,9 +33,13 @@ class Rig:
         return self.__broken
     
     def take_hit(self):
-        # Threshold for maximum damage, starts at 2 and increases per level
+        # Threshold for breaking starts at 2 and increases per upgrade level
         threshold = 2 + self.__upgrade_level
-        self.__damage += 1
+        # Upgrades reduce effective damage; higher level = more durable
+        damage_reduction = 0.25 * self.__upgrade_level  # each level reduces 25% damage impact
+        effective_damage = max(0.25, 1 - damage_reduction)
+        self.__damage += effective_damage
+
         if self.__damage >= threshold:
             self.__broken = True
             print(f"{self.__name} is now broken!")
@@ -57,6 +62,7 @@ class Rig:
     def upgrade(self):
         # Upgrade the level, CryptoToken logic implemented in Hacker.py
         self.__upgrade_level += 1
+        self.__max_storage += 2
         print(f"{self.__name} upgraded to level {self.__upgrade_level}.")
 
 
@@ -68,7 +74,10 @@ class Rig:
         print(f"{self.__name} generated a new asset: {asset_name}.")
 
     def store_asset(self, asset):
-        # Add asset to storage
+        # Add asset to storage if capacity allows
+        if len(self.__storage) >= self.__max_storage:
+            print(f"{self.__name}'s storage is full.")
+            return
         self.__storage.append(asset)
 
     def release_asset(self, asset_name):
