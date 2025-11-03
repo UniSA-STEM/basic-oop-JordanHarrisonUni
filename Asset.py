@@ -66,5 +66,7 @@ class Asset:
         print(f"{self.__name} has been decrypted using a Security Chip.")
 
     def __str__(self):
-        # Return a string showing name, description and encryption status
-        pass
+        if self.__encrypted:
+            return f"{self.__name}: {self.__description} [Encrypted]"
+        else:
+            return f"{self.__name}: {self.__description}"
