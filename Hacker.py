@@ -31,7 +31,7 @@ class Hacker:
         return self.__trace_level >= 5
 
     def acquire_rig(self, rig_name):
-        if self.__rig is None:
+        if self.__rig is not None:
             # Hacker can only have 1 rig
             print(f"{self.__name} already has a rig.")
             return
