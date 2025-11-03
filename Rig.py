@@ -7,6 +7,7 @@ Username: JordanHarrisonUni
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
 from Asset import Asset
+import random
 class Rig:
 
     # Initialisation method, takes 1 parameter name and the rest have default values
@@ -57,11 +58,14 @@ class Rig:
         # Upgrade the level, CryptoToken logic implemented in Hacker.py
         self.__upgrade_level += 1
         print(f"{self.__name} upgraded to level {self.__upgrade_level}.")
-        return
+
 
     def generate_asset(self):
-        # Generate a new random asset
-        pass
+        # Randomly generate one asset type
+        asset_name = random.choice(list(Asset.ASSETS.keys()))
+        new_asset = Asset.create(asset_name)
+        self.__storage.append(new_asset)
+        print(f"{self.__name} generated a new asset: {asset_name}.")
 
     def store_asset(self, asset):
         # Add asset to storage

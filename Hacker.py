@@ -42,7 +42,6 @@ class Hacker:
             print(f"{self.__name} does not have enough CryptoTokens to acquire a rig.")
             return
         
-        
         # Create a new rig instance and assign it to the user
         self.__rig = Rig(rig_name)
         print(f"{self.__name} has activated rig '{rig_name}'!")
@@ -50,7 +49,6 @@ class Hacker:
     def increase_trace(self, amount=1):
         # Increases the trace level by either a specific amount or 1 if not provided.
         self.__trace_level += amount
-        return
 
     def launch_attack(self, target_hacker):
         # Use a Data Spike to damage another hacker's rig
