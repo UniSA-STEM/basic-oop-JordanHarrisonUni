@@ -13,7 +13,7 @@ ASSETS = {
 }
 
 class Asset:
-    
+
     @classmethod
     def create(cls, asset_name):
         # Creates an asset by using one from our defined list

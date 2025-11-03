@@ -30,18 +30,26 @@ class Rig:
     def is_broken(self):
         return self.__broken
     
-    # Placeholder methods, will add implementation later
     def take_hit(self):
-        # Increase rig damage
-        pass
+        # Threshold for maximum damage, starts at 2 and increases per level
+        threshold = 2 + self.__upgrade_level
+        self.__damage += 1
+        if self.__damage >= threshold:
+            self.__broken = True
+            print(f"{self.__name} is now broken!")
 
     def repair(self):
-        # Repair rig if damaged
-        pass
+        if self.__damage == 0:
+            print(f"{self.__name} does not need repairs.")
+            return
+        self.__damage = 0
+        self.__broken = False
+        print(f"{self.__name} has been repaired to pristine condition.")
 
     def upgrade(self):
-        # Upgrade the rig
-        pass
+        # Upgrade the level, CryptoToken logic implemented in Hacker.py
+        self.__upgrade_level += 1
+        return
 
     def generate_asset(self):
         # Generate a new random asset
@@ -52,8 +60,18 @@ class Rig:
         pass
 
     def release_asset(self, asset_name):
-        # Remove and return an asset by name
-        pass
+        # Release an asset from the storage
+        for asset in list(self.__storage):
+            if asset.get_name() == asset_name and not asset.is_encrypted():
+                self.__storage.remove(asset)
+                return asset
+        return None
+    
+    def return_all_unencrypted_assets(self):
+        # Return a list of all unencrypted assets from storage.
+        unencrypted = [asset for asset in self.__storage if not asset.is_encrypted()]
+        self.__storage = [asset for asset in self.__storage if asset.is_encrypted()]
+        return unencrypted
 
     def condition(self):
         # Return the rig’s condition string
