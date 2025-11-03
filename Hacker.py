@@ -27,11 +27,17 @@ class Hacker:
     def has_rig(self):
         return self.__rig
 
-    # Placeholder methods, will add implementation later
-    def acquire_rig(self):
-        # Acquire a new rig
-        pass
-
+    def acquire_rig(self, rig_name):
+        token = self.scan_inventory("CryptoToken")
+        if token is None:
+            # If there isn't any CryptoToken's found in the user's inventory, error out
+            print(f"{self.__name} does not have enough CryptoTokens to acquire a rig.")
+            return
+        
+        # Create a new rig instance and assign it to the user
+        self.__rig = Rig(rig_name)
+        print(f"{self.__name} has activated rig '{rig_name}'!")
+        
     def launch_attack(self, target_hacker):
         # Use a Data Spike to damage another hacker's rig
         pass
@@ -61,8 +67,14 @@ class Hacker:
         pass
 
     def scan_inventory(self, asset_name):
-        # Search for and remove an asset by name
-        pass
+        for asset in self.__inventory:
+            # Loop through the entire inventory until you find the first occurance of a match
+            if asset.get_name() == asset_name:
+                # Remove the item from the inventory and return the result
+                self.__inventory.remove(asset)
+                return asset
+        # If there wasn't one found, it will reach this part of the code, and return None
+        return None
 
     def __str__(self):
         # Return a formatted string showing hacker details and inventory contents
