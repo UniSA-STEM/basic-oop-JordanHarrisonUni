@@ -68,6 +68,19 @@ def test_encryption(hacker1):
     for asset in hacker1._Hacker__inventory:
         print(asset)
 
+def test_edge_cases(hacker1):
+    print("\n--- TEST 5: Edge Cases ---")
+    # Try upgrading without a rig
+    hacker_no_rig = Hacker("Morpheus")
+    hacker_no_rig.upgrade_rig()
+
+    # Try encrypting without a Security Chip
+    hacker1.encrypt_asset("DataSpike")
+
+    # Force high trace to block attacks
+    hacker1._Hacker__trace_level = 5
+    hacker1.launch_attack(hacker_no_rig)
+
 if __name__ == "__main__":
     hacker1, hacker2 = test_basic_setup()
     test_attack_and_break(hacker1, hacker2)
