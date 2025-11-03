@@ -27,5 +27,14 @@ def test_basic_setup():
     print(hacker2)
     return hacker1, hacker2
 
-def __main__():
+# Test attacking and breaking of rig
+def test_attack_and_break(hacker1, hacker2):
+    print("\n--- TEST 2: Attack and Break ---")
+    # Launch attacks until target rig breaks
+    hacker1.launch_attack(hacker2)
+    hacker1.launch_attack(hacker2)
+    print(hacker2.get_rig())
+
+if __name__ == "__main__":
     hacker1, hacker2 = test_basic_setup()
+    test_attack_and_break(hacker1, hacker2)
