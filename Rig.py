@@ -57,8 +57,8 @@ class Rig:
         pass
 
     def store_asset(self, asset):
-        # Add an asset to storage
-        pass
+        # Add asset to storage
+        self.__storage.append(asset)
 
     def release_asset(self, asset_name):
         # Release an asset from the storage

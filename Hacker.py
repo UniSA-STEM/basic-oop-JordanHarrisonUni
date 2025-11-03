@@ -175,12 +175,36 @@ class Hacker:
         print(f"{self.__name} upgraded {self.__rig.get_name()} using a Hardware Patch.")
 
     def store_asset(self, asset_name):
-        # Move an asset from inventory to rig storage
-        pass
+        # Must have a rig to store assets
+        if self.__rig is None:
+            print(f"{self.__name} does not have a rig to store assets in.")
+            return
+
+        # Find the asset in inventory
+        asset = self.scan_inventory(asset_name)
+        if asset is None:
+            print(f"{self.__name} does not have {asset_name} in inventory.")
+            return
+
+        # Store the asset in the rig
+        self.__rig.store_asset(asset)
+        print(f"{asset_name} stored in {self.__rig.get_name()}.")
 
     def retrieve_asset(self, asset_name):
-        # Move an asset from rig storage to inventory
-        pass
+        # Must have a rig to retrieve from
+        if self.__rig is None:
+            print(f"{self.__name} does not have a rig to retrieve assets from.")
+            return
+
+        # Retrieve the asset from rig storage
+        asset = self.__rig.release_asset(asset_name)
+        if asset is None:
+            print(f"{asset_name} not found or encrypted in {self.__rig.get_name()}.")
+            return
+
+        # Move it back to inventory
+        self.__inventory.append(asset)
+        print(f"{asset_name} retrieved from {self.__rig.get_name()}.")
 
     def scan_inventory(self, asset_name):
         for asset in self.__inventory:
