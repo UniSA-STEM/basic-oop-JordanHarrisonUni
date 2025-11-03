@@ -217,5 +217,14 @@ class Hacker:
         return None
 
     def __str__(self):
-        # Return a formatted string showing hacker details and inventory contents
-        pass
+        # Get rig name or show "None" if hacker has no rig
+        rig_name = self.__rig.get_name() if self.__rig else "None"
+
+        # Build inventory display
+        if self.__inventory:
+            inventory_list = ", ".join(asset.get_name() for asset in self.__inventory)
+        else:
+            inventory_list = "Empty"
+
+        # Return formatted summary
+        return f"Hacker: {self.__name} | Rig: {rig_name} | Trace Level: {self.__trace_level} | Inventory: [{inventory_list}]"
