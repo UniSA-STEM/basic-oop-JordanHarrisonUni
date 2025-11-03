@@ -6,7 +6,7 @@ ID: harjd011
 Username: JordanHarrisonUni
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
-
+from Asset import Asset
 class Rig:
 
     # Initialisation method, takes 1 parameter name and the rest have default values
@@ -18,9 +18,9 @@ class Rig:
         # Assignment states each rig starts with 2 data spikes and 1 removable drive
         # Code for Asset init is not made yet so this may need to be changed in the future
         self.__storage = [
-            Asset("Data Spike", "Used to attack other rigs."),
-            Asset("Data Spike", "Used to attack other rigs."),
-            Asset("Removable Drive", "Used to extract assets from broken rigs.")
+            Asset.create("DataSpike"),
+            Asset.create("DataSpike"),
+            Asset.create("RemovableDrive")
         ]
 
     # Getters

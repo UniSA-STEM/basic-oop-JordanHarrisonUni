@@ -6,11 +6,14 @@ ID: harjd011
 Username: JordanHarrisonUni
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
+from Asset import Asset
+from Rig import Rig
+
 class Hacker:
     # Initialisation method, takes 1 parameter name and sets defaults
     def __init__(self, name):
         self.__name = name
-        self.__inventory = [Asset("CryptoToken", "Used to purchase a rig")]
+        self.__inventory = [Asset.create("CryptoToken")]
         self.__rig = None
         self.__trace_level = 0
 
