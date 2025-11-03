@@ -35,6 +35,41 @@ def test_attack_and_break(hacker1, hacker2):
     hacker1.launch_attack(hacker2)
     print(hacker2.get_rig())
 
+# Test repair and upgrade functions
+def test_repair_and_upgrade(hacker2):
+    print("\n--- TEST 3: Repair and Upgrade ---")
+    # Give hacker CryptoToken and HardwarePatch manually for testing
+    hacker2._Hacker__inventory.append(Asset.create("CryptoToken"))
+    hacker2._Hacker__inventory.append(Asset.create("HardwarePatch"))
+
+    # Try to repair
+    hacker2.get_rig().repair(hacker2)
+
+    # Upgrade rig
+    hacker2.upgrade_rig()
+    print(hacker2.get_rig())
+
+# Test encryption and decryption of items
+def test_encryption(hacker1):
+    print("\n--- TEST 4: Encryption and Decryption ---")
+    # Give hacker a SecurityChip and a DataSpike
+    hacker1._Hacker__inventory.append(Asset.create("SecurityChip"))
+    hacker1._Hacker__inventory.append(Asset.create("DataSpike"))
+
+    hacker1.encrypt_asset("DataSpike")
+    print("Inventory after encryption:")
+    for asset in hacker1._Hacker__inventory:
+        print(asset)
+
+    # Add another chip to decrypt
+    hacker1._Hacker__inventory.append(Asset.create("SecurityChip"))
+    hacker1.decrypt_asset("DataSpike")
+    print("Inventory after decryption:")
+    for asset in hacker1._Hacker__inventory:
+        print(asset)
+
 if __name__ == "__main__":
     hacker1, hacker2 = test_basic_setup()
     test_attack_and_break(hacker1, hacker2)
+    test_repair_and_upgrade(hacker2)
+    test_encryption(hacker1)
