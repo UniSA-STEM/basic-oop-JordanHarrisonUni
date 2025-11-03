@@ -9,7 +9,8 @@ This is my own work as defined by the University's Academic Misconduct Policy.
 ASSETS = {
     "CryptoToken": "Used to purchase and repair rigs.",
     "DataSpike": "Used to attack other rigs.",
-    "RemovableDrive": "Used to extract assets from broken rigs."
+    "RemovableDrive": "Used to extract assets from broken rigs.",
+    "SecurityChip": "Used to encrypt or decrypt an asset."
 }
 
 class Asset:
