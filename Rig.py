@@ -6,7 +6,7 @@ ID: harjd011
 Username: JordanHarrisonUni
 This is my own work as defined by the University's Academic Misconduct Policy.
 """
-from Asset import Asset
+from Asset import Asset, ASSETS
 import random
 class Rig:
 
@@ -68,7 +68,7 @@ class Rig:
 
     def generate_asset(self):
         # Randomly generate one asset type
-        asset_name = random.choice(list(Asset.ASSETS.keys()))
+        asset_name = random.choice(list(ASSETS.keys()))
         new_asset = Asset.create(asset_name)
         self.__storage.append(new_asset)
         print(f"{self.__name} generated a new asset: {asset_name}.")
