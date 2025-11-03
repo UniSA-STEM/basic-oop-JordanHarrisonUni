@@ -127,12 +127,36 @@ class Hacker:
         print(f"{self.__name} extracted {len(unencrypted_assets)} asset(s) from {target_rig.get_name()} (consumed a RemovableDrive).")
 
     def encrypt_asset(self, asset_name):
-        # Encrypt an asset in inventory or rig storage
-        pass
+        # Search inventory first
+        for asset in self.__inventory:
+            if asset.get_name() == asset_name:
+                asset.encrypt(self)
+                return
+
+        # Then search rig storage if hacker has one
+        if self.__rig:
+            for asset in self.__rig._Rig__storage:
+                if asset.get_name() == asset_name:
+                    asset.encrypt(self)
+                    return
+
+        print(f"{asset_name} not found to encrypt.")
 
     def decrypt_asset(self, asset_name):
-        # Decrypt an asset in inventory or rig storage
-        pass
+        # Search inventory first
+        for asset in self.__inventory:
+            if asset.get_name() == asset_name:
+                asset.decrypt(self)
+                return
+
+        # Then search rig storage if hacker has one
+        if self.__rig:
+            for asset in self.__rig._Rig__storage:
+                if asset.get_name() == asset_name:
+                    asset.decrypt(self)
+                    return
+
+        print(f"{asset_name} not found to decrypt.")
 
     def upgrade_rig(self):
         # Use a Hardware Patch to upgrade the rig
