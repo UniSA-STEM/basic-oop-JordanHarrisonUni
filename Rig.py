@@ -86,5 +86,10 @@ class Rig:
         return unencrypted
 
     def condition(self):
-        # Return the rig’s condition string
-        pass
+        # Return descriptive condition string
+        if self.__broken:
+            return f"Broken (Level {self.__upgrade_level})"
+        elif self.__damage == 0:
+            return f"Pristine (Level {self.__upgrade_level})"
+        else:
+            return f"Damaged (Level {self.__upgrade_level})"
