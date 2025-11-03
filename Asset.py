@@ -10,7 +10,8 @@ ASSETS = {
     "CryptoToken": "Used to purchase and repair rigs.",
     "DataSpike": "Used to attack other rigs.",
     "RemovableDrive": "Used to extract assets from broken rigs.",
-    "SecurityChip": "Used to encrypt or decrypt an asset."
+    "SecurityChip": "Used to encrypt or decrypt an asset.",
+    "HardwarePatch": "Used to upgrade a rig."
 }
 
 class Asset:

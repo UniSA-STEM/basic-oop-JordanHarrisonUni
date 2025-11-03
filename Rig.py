@@ -49,6 +49,7 @@ class Rig:
     def upgrade(self):
         # Upgrade the level, CryptoToken logic implemented in Hacker.py
         self.__upgrade_level += 1
+        print(f"{self.__name} upgraded to level {self.__upgrade_level}.")
         return
 
     def generate_asset(self):

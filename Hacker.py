@@ -159,8 +159,20 @@ class Hacker:
         print(f"{asset_name} not found to decrypt.")
 
     def upgrade_rig(self):
-        # Use a Hardware Patch to upgrade the rig
-        pass
+        # Must have a rig to upgrade
+        if self.__rig is None:
+            print(f"{self.__name} does not have a rig to upgrade.")
+            return
+
+        # Must have a Hardware Patch in inventory
+        patch = self.scan_inventory("HardwarePatch")
+        if patch is None:
+            print(f"{self.__name} does not have a Hardware Patch to upgrade {self.__rig.get_name()}.")
+            return
+
+        # Perform the upgrade
+        self.__rig.upgrade()
+        print(f"{self.__name} upgraded {self.__rig.get_name()} using a Hardware Patch.")
 
     def store_asset(self, asset_name):
         # Move an asset from inventory to rig storage
