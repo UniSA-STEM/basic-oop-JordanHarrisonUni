@@ -86,3 +86,4 @@ if __name__ == "__main__":
     test_attack_and_break(hacker1, hacker2)
     test_repair_and_upgrade(hacker2)
     test_encryption(hacker1)
+    test_edge_cases(hacker1)
