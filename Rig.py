@@ -38,10 +38,17 @@ class Rig:
             self.__broken = True
             print(f"{self.__name} is now broken!")
 
-    def repair(self):
+    def repair(self, hacker):
+        # Use a CryptoToken to repair the rig if damaged
         if self.__damage == 0:
             print(f"{self.__name} does not need repairs.")
             return
+
+        token = hacker.scan_inventory("CryptoToken")
+        if token is None:
+            print(f"{hacker.get_name()} does not have a CryptoToken to repair {self.__name}.")
+            return
+
         self.__damage = 0
         self.__broken = False
         print(f"{self.__name} has been repaired to pristine condition.")
